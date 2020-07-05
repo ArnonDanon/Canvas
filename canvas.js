@@ -32,8 +32,8 @@
             {
                 this.yDirection*=-1;
             }
-            this.y+=1*this.yDirection;
-            this.x+=1*this.xDirection;
+            this.y=this.y+(1*this.yDirection);
+            this.x=this.x+(1*this.xDirection);
         }
     }
     
@@ -47,13 +47,14 @@
         canvas.height=window.innerHeight;
         canvas.width=window.innerWidth;
         
-        var x=canvas.width/2;
-        var y=canvas.height/2;
         var radius=randomInt(5,30);
+        var x=randomInt(radius,canvas.width-radius);
+        var y=randomInt(radius,canvas.height-radius);
+        
         var xDirection=randomInt(-1,1);
         if(xDirection===0) xDirection=1;
         var yDirection=randomInt(-1,1);
-        if(yDirection===0)yDirection=1;
+        if(yDirection===0) yDirection=1;
 
         var circle=new Circle(x,y,radius,'red',xDirection,yDirection);
         animate();
