@@ -37,15 +37,25 @@
         }
     }
     
+    function randomInt(min, max) {
+        min = Math.floor(min);
+        max = Math.ceil(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+      }
 
     function resizeCanvas(){
         canvas.height=window.innerHeight;
         canvas.width=window.innerWidth;
+        
         var x=canvas.width/2;
         var y=canvas.height/2;
-        var radius=25;
-            
-        var circle=new Circle(x,y,radius,'red',1,1);
+        var radius=randomInt(5,30);
+        var xDirection=randomInt(-1,1);
+        if(xDirection===0) xDirection=1;
+        var yDirection=randomInt(-1,1);
+        if(yDirection===0)yDirection=1;
+
+        var circle=new Circle(x,y,radius,'red',xDirection,yDirection);
         animate();
         
         function animate(){
