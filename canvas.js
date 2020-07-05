@@ -4,12 +4,13 @@
 
     class Circle {
 
-        constructor(x, y, radius,color,direction) {
+        constructor(x, y, radius,color,xDirection,yDirection) {
             this.x = x;
             this.y = y;
             this.radius = radius;
             this.color=color;
-            this.direction=direction;
+            this.xDirection=xDirection;
+            this.yDirection=yDirection;
         }
 
         draw (){
@@ -25,11 +26,14 @@
             contex2d.closePath();
             if(this.x - this.radius < 0 || this.x+this.radius>canvas.width)
             {
-                this.direction*=-1;
+                this.xDirection*=-1;
             }
-            this.x+=1*this.direction;
-            
-            console.log(this.x +' ' +this.direction);
+            if(this.y - this.radius < 0 || this.y+this.radius>canvas.height)
+            {
+                this.yDirection*=-1;
+            }
+            this.y+=1*this.yDirection;
+            this.x+=1*this.xDirection;
         }
     }
     
@@ -41,7 +45,7 @@
         var y=canvas.height/2;
         var radius=25;
             
-        var circle=new Circle(x,y,radius,'red',1);
+        var circle=new Circle(x,y,radius,'red',1,1);
         animate();
         
         function animate(){
