@@ -23,7 +23,7 @@
                 this.radius,
                 0,
                 2*Math.PI);
-            contex2d.fillStyle = this.color;
+            contex2d.fillStyle = 'rgba('+this.color.r+','+this.color.g+','+this.color.b+','+this.color.a+')';
             contex2d.fill(); 
             contex2d.closePath();
             if(this.x - this.radius < 0 || this.x+this.radius>canvas.width)
@@ -82,7 +82,8 @@
         var yDirection=randomInt(-1,1);
         if(yDirection===0) yDirection=1;
 
-        var circle=new Circle(x,y,radius,'red',xDirection,yDirection);
+        var color ={r:randomInt(0,255),g:randomInt(0,255),b:randomInt(0,255),a:Math.random()};
+        var circle=new Circle(x,y,radius,color,xDirection,yDirection);
         return circle;
     }
 
@@ -93,6 +94,6 @@
     
 
     window.addEventListener("resize",resizeCanvas) ;
-    console.log(canvas);
+    
 }());
 
