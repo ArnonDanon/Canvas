@@ -2,6 +2,8 @@
     var canvas= document.querySelector("canvas");
     var contex2d=canvas.getContext('2d');
 
+    var randomCircles=[];
+
     class Circle {
 
         constructor(x, y, radius,color,xDirection,yDirection) {
@@ -46,8 +48,32 @@
     function resizeCanvas(){
         canvas.height=window.innerHeight;
         canvas.width=window.innerWidth;
+    
+        randomCircles=[];
+        GenerateRandomCircles(100);
         
-        var radius=randomInt(5,30);
+        animate();
+        
+        function animate(){
+            
+            requestAnimationFrame(animate);
+            clearCanvas();
+            randomCircles.forEach(circle => {
+                circle.draw();    
+            });
+        }
+    }
+    
+    resizeCanvas();
+    
+    function GenerateRandomCircles(numberofCircles){
+        for(var i=0;i<numberofCircles;i++){
+            var circle= CreateRandomCircle();
+            randomCircles.push(circle);
+        }
+    }
+    function CreateRandomCircle() {
+        var radius=randomInt(5,15);
         var x=randomInt(radius,canvas.width-radius);
         var y=randomInt(radius,canvas.height-radius);
         
@@ -57,19 +83,9 @@
         if(yDirection===0) yDirection=1;
 
         var circle=new Circle(x,y,radius,'red',xDirection,yDirection);
-        animate();
-        
-        function animate(){
-            
-            requestAnimationFrame(animate);
-            clearCanvas();
-            circle.draw();
-            
-        }
+        return circle;
     }
-    
-    resizeCanvas();
-    
+
     function clearCanvas(){
         contex2d.clearRect(0,0,canvas.width,canvas.height);
     }
